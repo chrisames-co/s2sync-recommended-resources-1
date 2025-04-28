@@ -419,7 +419,7 @@ export default function Dashboard() {
 
         {/* Content */}
         <main className="p-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-auto">
             {/* Combined resources */}
             {[...tools, ...books].map((resource, index) => {
               const Icon = resource.icon
@@ -447,16 +447,16 @@ export default function Dashboard() {
               return (
                 <Card
                   key={index}
-                  className={`shadow-md group transition-all duration-300 ease-in-out rounded-[12px] relative overflow-hidden h-[320px] ${
+                  className={`shadow-md group transition-all duration-300 ease-in-out rounded-[12px] relative overflow-hidden w-full h-[320px] ${
                     resource.url
                       ? "cursor-pointer hover:shadow-xl hover:translate-y-[-4px] hover:ring-2 hover:ring-[#4D80F3]/40"
                       : ""
                   }`}
                   onClick={() => resource.url && window.open(resource.url, "_blank")}
                 >
-                  <CardContent className="p-0 flex flex-col h-full">
+                  <CardContent className="p-0 flex flex-col h-full w-full">
                     <div
-                      className={`h-40 bg-gradient-to-r ${gradientClass} flex items-center justify-center rounded-t-[12px] relative`}
+                      className={`h-40 bg-gradient-to-r ${gradientClass} flex items-center justify-center rounded-t-[12px] relative w-full`}
                     >
                       <div className="absolute top-0 left-0 right-0 bg-black bg-opacity-70 text-white px-3 py-1 flex items-center justify-center">
                         <ResourceTypeIcon className="w-4 h-4 mr-1" />
