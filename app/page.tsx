@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import {
   Book,
   BarChart3,
@@ -12,8 +11,6 @@ import {
   Activity,
   MoreHorizontal,
   ChevronDown,
-  ChevronLeft,
-  BookOpen,
   MessageCircle,
   HeartPulse,
   Hash,
@@ -35,16 +32,30 @@ import {
   Dice1Icon as DiceIcon,
   Ruler,
   Building,
+  BookOpen,
+  FileText,
+  Globe,
 } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Card, CardContent } from "@/components/ui/card"
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
 export default function Dashboard() {
-  const [collapsed, setCollapsed] = useState(false)
+  // Define brand colors
+  const brandColors = {
+    primary: ["#4D80F3", "#3C4258", "#EB078B"],
+    accent: ["#542E7B", "#E8DF76", "#4A8762", "#E4B859", "#3FB4E4"],
+  }
+
+  // Function to generate gradient pairs from brand colors
+  const getGradientPair = (index) => {
+    const allColors = [...brandColors.primary, ...brandColors.accent]
+    const color1 = allColors[index % allColors.length]
+    const color2 = allColors[(index + 2) % allColors.length]
+    return `from-[${color1}] to-[${color2}]`
+  }
 
   // Tool cards with unique icons and colors
   const tools = [
@@ -52,38 +63,49 @@ export default function Dashboard() {
       name: "Check-in Questions",
       description: "Questions to facilitate team check-ins",
       icon: MessageCircle,
-      gradient: "from-blue-500 to-indigo-600",
-      trending: true,
+      gradient: getGradientPair(0),
+      resourceType: "Guide",
+      url: "https://systemandsoul.com/check-ins",
     },
     {
       name: "Leader Pulse",
       description: "Monitor leadership effectiveness",
       icon: HeartPulse,
-      gradient: "from-purple-500 to-pink-600",
+      gradient: getGradientPair(1),
+      resourceType: "Platform",
+      url: "https://www.systemandsoul.com/leadershippulse",
     },
     {
       name: "261",
       description: "Strategic planning framework",
       icon: Hash,
-      gradient: "from-green-500 to-teal-600",
+      gradient: getGradientPair(2),
+      resourceType: "Guide",
+      url: "https://www.systemandsoul.com/261",
     },
     {
       name: "6 Dimensions of Compensation",
       description: "Comprehensive compensation strategy",
       icon: Layers,
-      gradient: "from-orange-500 to-red-600",
+      gradient: getGradientPair(3),
+      resourceType: "Guide",
+      url: "https://www.systemandsoul.com/6doc",
     },
     {
       name: "Leverage",
       description: "Maximize team productivity and impact",
       icon: TrendingUp,
-      gradient: "from-cyan-500 to-blue-600",
+      gradient: getGradientPair(4),
+      resourceType: "Platform",
+      url: "https://s2leverage.com",
     },
     {
       name: "Diagnostic",
       description: "Identify organizational challenges",
       icon: Stethoscope,
-      gradient: "from-amber-500 to-orange-600",
+      gradient: getGradientPair(5),
+      resourceType: "Platform",
+      url: "https://s2diagnostic.com",
     },
   ]
 
@@ -93,93 +115,121 @@ export default function Dashboard() {
       name: "Renegades",
       author: "Benj Miller and McKenzie Decker",
       icon: Flag,
-      gradient: "from-red-500 to-pink-600",
-      trending: true,
+      gradient: getGradientPair(6),
+      resourceType: "Book",
+      url: "https://www.amazon.com/Renegades-Benj-Miller/dp/1732011003",
     },
     {
       name: "Clarity Field Guide",
       author: "Benj Miller and Chris White",
       icon: Compass,
-      gradient: "from-blue-500 to-cyan-600",
-      trending: true,
+      gradient: getGradientPair(7),
+      resourceType: "Guide",
+      url: "", // No URL provided
     },
     {
       name: "The Only Leaders Worth Following",
       author: "Tim Spiker",
       icon: Crown,
-      gradient: "from-purple-500 to-indigo-600",
+      gradient: getGradientPair(0),
+      resourceType: "Book",
+      url: "https://www.amazon.com/Only-Leaders-Worth-Following-Transformational/dp/0996403604",
     },
     {
       name: "Zag",
       author: "Marty Neumeier",
       icon: ZigZag,
-      gradient: "from-yellow-500 to-amber-600",
+      gradient: getGradientPair(1),
+      resourceType: "Book",
+      url: "https://www.amazon.com/Zag-Strategy-High-Performance-Brands/dp/0321426770",
     },
     {
       name: "Good to Great",
       author: "Jim Collins",
       icon: Award,
-      gradient: "from-emerald-500 to-green-600",
+      gradient: getGradientPair(2),
+      resourceType: "Book",
+      url: "https://www.amazon.com/Good-Great-Some-Companies-Others/dp/0066620996",
     },
     {
       name: "Culture Code",
       author: "Daniel Coyle",
       icon: Users,
-      gradient: "from-teal-500 to-cyan-600",
+      gradient: getGradientPair(3),
+      resourceType: "Book",
+      url: "https://www.amazon.com/Culture-Code-Secrets-Highly-Successful/dp/0804176981",
     },
     {
       name: "Leadership and Self Deception",
       author: "The Arbinger Institute",
       icon: Eye,
-      gradient: "from-indigo-500 to-violet-600",
+      gradient: getGradientPair(4),
+      resourceType: "Book",
+      url: "https://www.amazon.com/Leadership-Self-Deception-Getting-Out-Box/dp/1576759776",
     },
     {
       name: "Start with Why",
       author: "Simon Sinek",
       icon: Target,
-      gradient: "from-rose-500 to-red-600",
+      gradient: getGradientPair(5),
+      resourceType: "Book",
+      url: "https://www.amazon.com/Start-Why-Leaders-Inspire-Everyone/dp/1591846447",
     },
     {
       name: "Positioning & Focus",
       author: "Al Ries",
       icon: Crosshair,
-      gradient: "from-sky-500 to-blue-600",
+      gradient: getGradientPair(6),
+      resourceType: "Book",
+      url: "https://www.amazon.com/Positioning-Battle-Your-Mind-Anniversary/dp/0071373586",
     },
     {
       name: "5 Dysfunctions of a team",
       author: "Patrick Lencioni",
       icon: AlertTriangle,
-      gradient: "from-orange-500 to-amber-600",
+      gradient: getGradientPair(7),
+      resourceType: "Book",
+      url: "https://www.amazon.com/Five-Dysfunctions-Team-Leadership-Fable/dp/0787960756",
     },
     {
       name: "The Advantage",
       author: "Patrick Lencioni",
       icon: Trophy,
-      gradient: "from-lime-500 to-green-600",
+      gradient: getGradientPair(0),
+      resourceType: "Book",
+      url: "https://www.amazon.com/Advantage-Organizational-Health-Everything-Business/dp/0470941529",
     },
     {
       name: "7 Habits of Highly Effective People",
       author: "Stephen Covey",
       icon: CheckSquare,
-      gradient: "from-fuchsia-500 to-purple-600",
+      gradient: getGradientPair(1),
+      resourceType: "Book",
+      url: "https://www.amazon.com/Habits-Highly-Effective-People-Powerful/dp/0743269519",
     },
     {
       name: "Thinking in Bets",
       author: "Annie Duke",
       icon: DiceIcon,
-      gradient: "from-slate-500 to-gray-600",
+      gradient: getGradientPair(2),
+      resourceType: "Book",
+      url: "https://www.amazon.com/Thinking-Bets-Making-Smarter-Decisions/dp/0735216355",
     },
     {
       name: "Measure What Matters",
       author: "John Doerr",
       icon: Ruler,
-      gradient: "from-emerald-500 to-teal-600",
+      gradient: getGradientPair(3),
+      resourceType: "Book",
+      url: "https://www.amazon.com/Measure-What-Matters-Google-Foundation/dp/0525536221",
     },
     {
       name: "Rockefeller Habits",
       author: "Verne Harnish",
       icon: Building,
-      gradient: "from-blue-500 to-indigo-600",
+      gradient: getGradientPair(4),
+      resourceType: "Book",
+      url: "https://www.amazon.com/Scaling-Up-Mastering-Rockefeller-Habits/dp/0986019526",
     },
   ]
 
@@ -341,14 +391,6 @@ export default function Dashboard() {
             </button>
           </div>
         </div>
-
-        {/* Collapse button */}
-        <button
-          className="absolute -right-6 top-1/2 transform -translate-y-1/2 bg-[#2d3748] text-white p-1 rounded-r"
-          onClick={() => setCollapsed(!collapsed)}
-        >
-          <ChevronLeft className="w-4 h-4" />
-        </button>
       </div>
 
       {/* Main content */}
@@ -376,89 +418,80 @@ export default function Dashboard() {
         </header>
 
         {/* Content */}
-        <main className="p-6 space-y-12">
-          {/* Tools Section */}
-          <section className="mb-8">
-            <div className="flex items-center mb-4">
-              <Layers className="w-5 h-5 mr-2 text-gray-700" />
-              <h2 className="text-xl font-semibold">Tools</h2>
-            </div>
-            <ScrollArea className="w-full pb-6">
-              <div className="flex space-x-4 p-1">
-                {tools.map((tool, index) => {
-                  const Icon = tool.icon
-                  return (
-                    <Card
-                      key={index}
-                      className="w-[280px] flex-shrink-0 shadow-md hover:shadow-lg transition-shadow rounded-[12px] relative overflow-hidden"
-                    >
-                      <CardContent className="p-0">
-                        <div
-                          className={`h-32 bg-gradient-to-r ${tool.gradient} flex items-center justify-center rounded-t-[12px] relative`}
-                        >
-                          {tool.trending && (
-                            <div className="absolute top-0 left-0 right-0 bg-black bg-opacity-70 text-white px-3 py-1 flex items-center justify-center">
-                              <TrendingUp className="w-4 h-4 mr-1" />
-                              <span className="text-xs font-medium">TRENDING</span>
-                            </div>
-                          )}
-                          <Icon className="h-12 w-12 text-white" />
-                        </div>
-                        <div className="p-5">
-                          <h3 className="font-semibold text-lg mb-2 break-words">{tool.name}</h3>
-                          <p className="text-sm text-gray-500 break-words min-h-[40px]">{tool.description}</p>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  )
-                })}
-              </div>
-              <ScrollBar orientation="horizontal" />
-            </ScrollArea>
-          </section>
+        <main className="p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {/* Combined resources */}
+            {[...tools, ...books].map((resource, index) => {
+              const Icon = resource.icon
+              const isBook = "author" in resource
 
-          {/* Books Section */}
-          <section className="mb-8">
-            <div className="flex items-center mb-4">
-              <BookOpen className="w-5 h-5 mr-2 text-gray-700" />
-              <h2 className="text-xl font-semibold">Books</h2>
-            </div>
-            <ScrollArea className="w-full pb-6">
-              <div className="flex space-x-4 p-1">
-                {books.map((book, index) => {
-                  const Icon = book.icon
-                  return (
-                    <Card
-                      key={index}
-                      className="w-[250px] flex-shrink-0 shadow-md hover:shadow-lg transition-shadow rounded-[12px] relative overflow-hidden"
+              // Function to get the appropriate icon for the resource type
+              const getResourceTypeIcon = (type) => {
+                switch (type) {
+                  case "Book":
+                    return BookOpen
+                  case "Guide":
+                    return FileText
+                  case "Platform":
+                    return Globe
+                  default:
+                    return BookOpen
+                }
+              }
+
+              const ResourceTypeIcon = getResourceTypeIcon(resource.resourceType)
+
+              // Extract gradient colors from the string
+              const gradientClass = resource.gradient
+
+              return (
+                <Card
+                  key={index}
+                  className={`shadow-md group transition-all duration-300 ease-in-out rounded-[12px] relative overflow-hidden h-[320px] ${
+                    resource.url
+                      ? "cursor-pointer hover:shadow-xl hover:translate-y-[-4px] hover:ring-2 hover:ring-[#4D80F3]/40"
+                      : ""
+                  }`}
+                  onClick={() => resource.url && window.open(resource.url, "_blank")}
+                >
+                  <CardContent className="p-0 flex flex-col h-full">
+                    <div
+                      className={`h-40 bg-gradient-to-r ${gradientClass} flex items-center justify-center rounded-t-[12px] relative`}
                     >
-                      <CardContent className="p-0">
-                        <div
-                          className={`h-48 bg-gradient-to-r ${book.gradient} flex items-center justify-center rounded-t-[12px] relative`}
-                        >
-                          {book.trending && (
-                            <div className="absolute top-0 left-0 right-0 bg-black bg-opacity-70 text-white px-3 py-1 flex items-center justify-center">
-                              <TrendingUp className="w-4 h-4 mr-1" />
-                              <span className="text-xs font-medium">TRENDING</span>
-                            </div>
-                          )}
-                          <Icon className="h-12 w-12 text-white" />
-                        </div>
-                        <div className="p-5">
-                          <h3 className="font-semibold text-lg mb-2 break-words">{book.name}</h3>
-                          <p className="text-sm text-gray-500 break-words min-h-[20px]">{book.author}</p>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  )
-                })}
-              </div>
-              <ScrollBar orientation="horizontal" />
-            </ScrollArea>
-          </section>
+                      <div className="absolute top-0 left-0 right-0 bg-black bg-opacity-70 text-white px-3 py-1 flex items-center justify-center">
+                        <ResourceTypeIcon className="w-4 h-4 mr-1" />
+                        <span className="text-xs font-medium">{resource.resourceType.toUpperCase()}</span>
+                      </div>
+                      <Icon
+                        className={`h-[3.4rem] w-[3.4rem] text-white drop-shadow-lg mt-3 ${
+                          resource.url
+                            ? "transform transition-transform duration-300 ease-in-out group-hover:scale-110"
+                            : ""
+                        }`}
+                        strokeWidth={1.8} // Reduced by 10% from default 2.0
+                      />
+                    </div>
+                    <div className="p-5 flex-1 flex flex-col">
+                      <h3
+                        className={`font-semibold text-lg mb-2 line-clamp-2 ${
+                          resource.url ? "group-hover:text-[#4D80F3] transition-colors duration-300" : ""
+                        }`}
+                      >
+                        {resource.name}
+                      </h3>
+                      {isBook ? (
+                        <p className="text-sm text-gray-500 line-clamp-3">{resource.author}</p>
+                      ) : (
+                        <p className="text-sm text-gray-500 line-clamp-3">{resource.description}</p>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              )
+            })}
+          </div>
         </main>
       </div>
     </div>
   )
 }
-
