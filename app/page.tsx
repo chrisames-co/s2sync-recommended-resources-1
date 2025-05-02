@@ -24,7 +24,6 @@ import {
   ArrowRight,
 } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Card, CardContent } from "@/components/ui/card"
@@ -280,6 +279,18 @@ export default function Dashboard() {
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
+
+        {/* Introduction */}
+        <div className="px-6 pt-6 pb-2">
+          <p className="text-gray-600 max-w-4xl mb-3">
+            Curated tools, guides, and platforms to help leaders build healthier teams, make smarter decisions, and
+            drive meaningful progress.
+          </p>
+          <p className="text-gray-600 max-w-4xl">
+            Whether you're aligning your vision, leveling up your leadership, or tackling tough organizational
+            challenges, these resources are designed to give you clarity and momentum where it matters most.
+          </p>
+        </div>
 
         {/* Content */}
         <main className="p-6">
