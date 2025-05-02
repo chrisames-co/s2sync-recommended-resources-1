@@ -41,7 +41,7 @@ export default function BooksPage() {
     const allColors = [...brandColors.primary, ...brandColors.accent]
     const color1 = allColors[index % allColors.length]
     const color2 = allColors[(index + 2) % allColors.length]
-    return `from-[${color1}] to-[${color2}]`
+    return { color1, color2 }
   }
 
   // Book cards with unique icons and colors
@@ -337,9 +337,6 @@ export default function BooksPage() {
             {books.map((book, index) => {
               const Icon = book.icon
 
-              // Extract gradient colors from the string
-              const gradientClass = book.gradient
-
               return (
                 <Card
                   key={index}
@@ -352,7 +349,10 @@ export default function BooksPage() {
                 >
                   <CardContent className="p-0 flex flex-col h-full w-full">
                     <div
-                      className={`h-40 bg-gradient-to-r ${gradientClass} flex items-center justify-center rounded-t-[12px] relative w-full`}
+                      className="h-40 flex items-center justify-center rounded-t-[12px] relative w-full"
+                      style={{
+                        background: `linear-gradient(to right, ${book.gradient.color1}, ${book.gradient.color2})`,
+                      }}
                     >
                       <div className="absolute top-0 left-0 right-0 bg-black bg-opacity-70 text-white px-3 py-1 flex items-center justify-center">
                         <BookOpen className="w-4 h-4 mr-1" />

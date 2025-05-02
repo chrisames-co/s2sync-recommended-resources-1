@@ -42,7 +42,7 @@ export default function Dashboard() {
     const allColors = [...brandColors.primary, ...brandColors.accent]
     const color1 = allColors[index % allColors.length]
     const color2 = allColors[(index + 2) % allColors.length]
-    return `from-[${color1}] to-[${color2}]`
+    return { color1, color2 }
   }
 
   // Tool cards with unique icons and colors
@@ -305,9 +305,6 @@ export default function Dashboard() {
 
               const ResourceTypeIcon = getResourceTypeIcon(tool.resourceType)
 
-              // Extract gradient colors from the string
-              const gradientClass = tool.gradient
-
               return (
                 <Card
                   key={index}
@@ -320,7 +317,10 @@ export default function Dashboard() {
                 >
                   <CardContent className="p-0 flex flex-col h-full w-full">
                     <div
-                      className={`h-40 bg-gradient-to-r ${gradientClass} flex items-center justify-center rounded-t-[12px] relative w-full`}
+                      className="h-40 flex items-center justify-center rounded-t-[12px] relative w-full"
+                      style={{
+                        background: `linear-gradient(to right, ${tool.gradient.color1}, ${tool.gradient.color2})`,
+                      }}
                     >
                       <div className="absolute top-0 left-0 right-0 bg-black bg-opacity-70 text-white px-3 py-1 flex items-center justify-center">
                         <ResourceTypeIcon className="w-4 h-4 mr-1" />
@@ -358,7 +358,10 @@ export default function Dashboard() {
               <Link href="/books" className="h-full w-full block">
                 <CardContent className="p-0 flex flex-col h-full w-full">
                   <div
-                    className={`h-40 bg-gradient-to-r from-[${brandColors.primary[0]}] to-[${brandColors.accent[0]}] flex items-center justify-center rounded-t-[12px] relative w-full`}
+                    className="h-40 flex items-center justify-center rounded-t-[12px] relative w-full"
+                    style={{
+                      background: `linear-gradient(to right, ${brandColors.primary[0]}, ${brandColors.accent[0]})`,
+                    }}
                   >
                     <div className="absolute top-0 left-0 right-0 bg-black bg-opacity-70 text-white px-3 py-1 flex items-center justify-center">
                       <BookOpen className="w-4 h-4 mr-1" />
