@@ -266,9 +266,6 @@ export default function Dashboard() {
         <header className="flex items-center justify-between p-4 border-b">
           <div className="flex items-center">
             <h1 className="text-2xl font-semibold mr-2">Recommended Resources</h1>
-            <Badge variant="outline" className="bg-green-100 text-green-800 border-green-200">
-              Active
-            </Badge>
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

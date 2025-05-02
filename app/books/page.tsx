@@ -130,7 +130,7 @@ export default function BooksPage() {
     {
       name: "5 Dysfunctions of a team",
       author: "Patrick Lencioni",
-      description: "Every team struggles in predictable ways. Here's how to build real trust and results.",
+      description: "Every team struggles in predictable ways. Build trust, get results.",
       icon: AlertTriangle,
       gradient: getGradientPair(7),
       resourceType: "Book",
@@ -312,9 +312,6 @@ export default function BooksPage() {
               </Link>
             </Button>
             <h1 className="text-2xl font-semibold mr-2">Recommended Books</h1>
-            <Badge variant="outline" className="bg-green-100 text-green-800 border-green-200">
-              {books.length} Books
-            </Badge>
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
