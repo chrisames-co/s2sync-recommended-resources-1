@@ -23,7 +23,6 @@ import {
   ArrowLeft,
 } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Card, CardContent } from "@/components/ui/card"
@@ -54,6 +53,7 @@ export default function BooksPage() {
       gradient: getGradientPair(6),
       resourceType: "Book",
       url: "https://www.amazon.com/Renegades-Benj-Miller/dp/1732011003",
+      helpsWith: ["Entrepreneurship", "Innovation", "Leadership"],
     },
     {
       name: "Clarity Field Guide",
@@ -63,6 +63,7 @@ export default function BooksPage() {
       gradient: getGradientPair(7),
       resourceType: "Guide",
       url: "", // No URL provided
+      helpsWith: ["Strategic Planning", "Focus", "Productivity"],
     },
     {
       name: "The Only Leaders Worth Following",
@@ -72,6 +73,7 @@ export default function BooksPage() {
       gradient: getGradientPair(0),
       resourceType: "Book",
       url: "https://www.amazon.com/Only-Leaders-Worth-Following-Transformational/dp/0996403604",
+      helpsWith: ["Leadership Development", "Personal Growth", "Team Building"],
     },
     {
       name: "Zag",
@@ -81,6 +83,7 @@ export default function BooksPage() {
       gradient: getGradientPair(1),
       resourceType: "Book",
       url: "https://www.amazon.com/Zag-Strategy-High-Performance-Brands/dp/0321426770",
+      helpsWith: ["Marketing", "Branding", "Strategy"],
     },
     {
       name: "Good to Great",
@@ -90,6 +93,7 @@ export default function BooksPage() {
       gradient: getGradientPair(2),
       resourceType: "Book",
       url: "https://www.amazon.com/Good-Great-Some-Companies-Others/dp/0066620996",
+      helpsWith: ["Business Growth", "Leadership", "Organizational Development"],
     },
     {
       name: "Culture Code",
@@ -99,6 +103,7 @@ export default function BooksPage() {
       gradient: getGradientPair(3),
       resourceType: "Book",
       url: "https://www.amazon.com/Culture-Code-Secrets-Highly-Successful/dp/0804176981",
+      helpsWith: ["Company Culture", "Team Building", "Leadership"],
     },
     {
       name: "Leadership and Self Deception",
@@ -108,6 +113,7 @@ export default function BooksPage() {
       gradient: getGradientPair(4),
       resourceType: "Book",
       url: "https://www.amazon.com/Leadership-Self-Deception-Getting-Out-Box/dp/1576759776",
+      helpsWith: ["Self-Awareness", "Leadership", "Relationships"],
     },
     {
       name: "Start with Why",
@@ -117,6 +123,7 @@ export default function BooksPage() {
       gradient: getGradientPair(5),
       resourceType: "Book",
       url: "https://www.amazon.com/Start-Why-Leaders-Inspire-Everyone/dp/1591846447",
+      helpsWith: ["Purpose", "Leadership", "Marketing"],
     },
     {
       name: "Positioning & Focus",
@@ -126,6 +133,7 @@ export default function BooksPage() {
       gradient: getGradientPair(6),
       resourceType: "Book",
       url: "https://www.amazon.com/Positioning-Battle-Your-Mind-Anniversary/dp/0071373586",
+      helpsWith: ["Marketing", "Branding", "Strategy"],
     },
     {
       name: "5 Dysfunctions of a team",
@@ -135,6 +143,7 @@ export default function BooksPage() {
       gradient: getGradientPair(7),
       resourceType: "Book",
       url: "https://www.amazon.com/Five-Dysfunctions-Team-Leadership-Fable/dp/0787960756",
+      helpsWith: ["Team Building", "Leadership", "Conflict Resolution"],
     },
     {
       name: "The Advantage",
@@ -144,6 +153,7 @@ export default function BooksPage() {
       gradient: getGradientPair(0),
       resourceType: "Book",
       url: "https://www.amazon.com/Advantage-Organizational-Health-Everything-Business/dp/0470941529",
+      helpsWith: ["Organizational Health", "Leadership", "Team Building"],
     },
     {
       name: "7 Habits of Highly Effective People",
@@ -153,6 +163,7 @@ export default function BooksPage() {
       gradient: getGradientPair(1),
       resourceType: "Book",
       url: "https://www.amazon.com/Habits-Highly-Effective-People-Powerful/dp/0743269519",
+      helpsWith: ["Personal Development", "Leadership", "Productivity"],
     },
     {
       name: "Thinking in Bets",
@@ -162,6 +173,7 @@ export default function BooksPage() {
       gradient: getGradientPair(2),
       resourceType: "Book",
       url: "https://www.amazon.com/Thinking-Bets-Making-Smarter-Decisions/dp/0735216355",
+      helpsWith: ["Decision Making", "Risk Management", "Strategy"],
     },
     {
       name: "Measure What Matters",
@@ -171,6 +183,7 @@ export default function BooksPage() {
       gradient: getGradientPair(3),
       resourceType: "Book",
       url: "https://www.amazon.com/Measure-What-Matters-Google-Foundation/dp/0525536221",
+      helpsWith: ["Goal Setting", "Performance Management", "Leadership"],
     },
     {
       name: "Rockefeller Habits",
@@ -180,6 +193,7 @@ export default function BooksPage() {
       gradient: getGradientPair(4),
       resourceType: "Book",
       url: "https://www.amazon.com/Scaling-Up-Mastering-Rockefeller-Habits/dp/0986019526",
+      helpsWith: ["Business Growth", "Scaling", "Leadership"],
     },
   ]
 
@@ -337,7 +351,7 @@ export default function BooksPage() {
               return (
                 <Card
                   key={index}
-                  className={`shadow-md group transition-all duration-300 ease-in-out rounded-[12px] relative overflow-hidden w-full h-[320px] ${
+                  className={`shadow-md group transition-all duration-300 ease-in-out rounded-[12px] relative overflow-hidden w-full ${
                     book.url
                       ? "cursor-pointer hover:shadow-xl hover:translate-y-[-4px] hover:ring-2 hover:ring-[#4D80F3]/40"
                       : ""
@@ -364,7 +378,7 @@ export default function BooksPage() {
                         strokeWidth={1.8}
                       />
                     </div>
-                    <div className="p-5 flex-1 flex flex-col">
+                    <div className="p-5 flex-1 flex flex-col min-h-[200px]">
                       <h3
                         className={`font-semibold text-lg mb-2 line-clamp-2 ${
                           book.url ? "group-hover:text-[#4D80F3] transition-colors duration-300" : ""
@@ -373,7 +387,24 @@ export default function BooksPage() {
                         {book.name}
                       </h3>
                       <p className="text-sm text-gray-600 font-medium mb-1">{book.author}</p>
-                      <p className="text-sm text-gray-500 line-clamp-3">{book.description}</p>
+                      <p className="text-sm text-gray-500 line-clamp-2 mb-4">{book.description}</p>
+
+                      {/* Add the "Helps with" section here */}
+                      {book.helpsWith && book.helpsWith.length > 0 && (
+                        <div className="mt-auto">
+                          <p className="text-xs font-bold text-black mb-1">HELPS WITH</p>
+                          <div className="flex flex-wrap gap-1">
+                            {book.helpsWith.map((tag, i) => (
+                              <span
+                                key={i}
+                                className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full whitespace-nowrap"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </CardContent>
                 </Card>

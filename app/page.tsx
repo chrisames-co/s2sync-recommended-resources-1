@@ -44,55 +44,63 @@ export default function Dashboard() {
     return { color1, color2 }
   }
 
-  // Tool cards with unique icons and colors
+  // Replace the tools array with the data from the CSV file
+  // Update the tools array with the data from the CSV file
   const tools = [
     {
       name: "Check-in Questions",
-      description: "Questions to facilitate team check-ins",
+      description: "Questions to facilitate team check-ins and create meaningful conversations in your meetings.",
       icon: MessageCircle,
       gradient: getGradientPair(0),
       resourceType: "Guide",
       url: "https://systemandsoul.com/check-ins",
+      helpsWith: ["Team Building", "Communication", "Meeting Effectiveness"],
     },
     {
       name: "Leader Pulse",
-      description: "Monitor leadership effectiveness",
+      description: "Monitor leadership effectiveness and get real-time feedback on your leadership performance.",
       icon: HeartPulse,
       gradient: getGradientPair(1),
       resourceType: "Platform",
       url: "https://www.systemandsoul.com/leadershippulse",
+      helpsWith: ["Leadership Development", "Team Feedback", "Performance Improvement"],
     },
     {
       name: "261",
-      description: "Strategic planning framework",
+      description: "Strategic planning framework to align your team around what matters most.",
       icon: Hash,
       gradient: getGradientPair(2),
       resourceType: "Guide",
       url: "https://www.systemandsoul.com/261",
+      helpsWith: ["Strategic Planning", "Team Alignment", "Goal Setting"],
     },
     {
       name: "6 Dimensions of Compensation",
-      description: "Comprehensive compensation strategy",
+      description: "Comprehensive compensation strategy to attract and retain top talent.",
       icon: Layers,
       gradient: getGradientPair(3),
       resourceType: "Guide",
       url: "https://www.systemandsoul.com/6doc",
+      helpsWith: ["Compensation Planning", "Talent Management", "Employee Retention"],
     },
     {
       name: "Leverage",
-      description: "Maximize team productivity and impact",
+      description:
+        "Maximize team productivity and impact by identifying and focusing on your highest-leverage activities.",
       icon: TrendingUp,
       gradient: getGradientPair(4),
       resourceType: "Platform",
       url: "https://s2leverage.com",
+      helpsWith: ["Productivity", "Time Management", "Team Effectiveness"],
     },
     {
       name: "Diagnostic",
-      description: "Identify organizational challenges",
+      description: "Identify organizational challenges and get a clear picture of your company's health.",
       icon: Stethoscope,
       gradient: getGradientPair(5),
       resourceType: "Platform",
       url: "https://s2diagnostic.com",
+      helpsWith: ["Organizational Health", "Problem Identification", "Business Assessment"],
     },
   ]
 
@@ -316,7 +324,7 @@ export default function Dashboard() {
               return (
                 <Card
                   key={index}
-                  className={`shadow-md group transition-all duration-300 ease-in-out rounded-[12px] relative overflow-hidden w-full h-[320px] ${
+                  className={`shadow-md group transition-all duration-300 ease-in-out rounded-[12px] relative overflow-hidden w-full ${
                     tool.url
                       ? "cursor-pointer hover:shadow-xl hover:translate-y-[-4px] hover:ring-2 hover:ring-[#4D80F3]/40"
                       : ""
@@ -343,7 +351,7 @@ export default function Dashboard() {
                         strokeWidth={1.8}
                       />
                     </div>
-                    <div className="p-5 flex-1 flex flex-col">
+                    <div className="p-5 flex-1 flex flex-col min-h-[200px]">
                       <h3
                         className={`font-semibold text-lg mb-2 line-clamp-2 ${
                           tool.url ? "group-hover:text-[#4D80F3] transition-colors duration-300" : ""
@@ -351,7 +359,24 @@ export default function Dashboard() {
                       >
                         {tool.name}
                       </h3>
-                      <p className="text-sm text-gray-500 line-clamp-3">{tool.description}</p>
+                      <p className="text-sm text-gray-500 line-clamp-3 mb-4">{tool.description}</p>
+
+                      {/* Add the "Helps with" section here */}
+                      {tool.helpsWith && tool.helpsWith.length > 0 && (
+                        <div className="mt-auto">
+                          <p className="text-xs font-bold text-black mb-1">HELPS WITH</p>
+                          <div className="flex flex-wrap gap-1">
+                            {tool.helpsWith.map((tag, i) => (
+                              <span
+                                key={i}
+                                className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full whitespace-nowrap"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
@@ -360,7 +385,7 @@ export default function Dashboard() {
 
             {/* Books Card */}
             <Card
-              className="shadow-md group transition-all duration-300 ease-in-out rounded-[12px] relative overflow-hidden w-full h-[320px] cursor-pointer hover:shadow-xl hover:translate-y-[-4px] hover:ring-2 hover:ring-[#4D80F3]/40"
+              className="shadow-md group transition-all duration-300 ease-in-out rounded-[12px] relative overflow-hidden w-full cursor-pointer hover:shadow-xl hover:translate-y-[-4px] hover:ring-2 hover:ring-[#4D80F3]/40"
               onClick={() => {}}
             >
               <Link href="/books" className="h-full w-full block">
@@ -380,7 +405,7 @@ export default function Dashboard() {
                       strokeWidth={1.8}
                     />
                   </div>
-                  <div className="p-5 flex-1 flex flex-col">
+                  <div className="p-5 flex-1 flex flex-col min-h-[200px]">
                     <div className="flex justify-between items-center mb-2">
                       <h3 className="font-semibold text-lg line-clamp-2 group-hover:text-[#4D80F3] transition-colors duration-300">
                         Books
